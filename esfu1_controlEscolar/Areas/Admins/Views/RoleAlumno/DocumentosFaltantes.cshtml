@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Citatorios";
+    ICollection<esfu1_controlEscolar.Areas.Admins.Models.DocumentosFaltantes> docs = ViewBag.docs;
+}
+
+
+@if (docs.Count() == 0)
+{
+    <div>
+        <img src="~/Areas/assets/img/icon.jpg" />
+    </div>
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel-group col-md-6">
+            @foreach (var doc in docs)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Aviso de documentos faltantes</div>
+                    <div class="panel-body">
+                        @doc.DocumentosFaltantes_descripcion
+
+                    </div>
+                    <div class="panel-footer">Fecha: @doc.DocumentosFaltantes_fecha.ToShortDateString()</div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+

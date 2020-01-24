@@ -1,0 +1,67 @@
+﻿@model IEnumerable<esfu1_controlEscolar.Areas.Admins.Models.Alumno>
+
+@{
+    ViewBag.Title = "Indice reportes";
+}
+
+<table class="table table-bordered table-striped table-responsive" style="background-color:white;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoPaterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoMaterno)
+            </th>
+            <th>
+                Reportes
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var reporte in item.Reportes)
+                        {
+                            <li>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-info" href="@Url.Action("Edit","Reporte", new { id = reporte.Reporte_id})" title="editar reporte">
+                                        editar reporte de @reporte.Reporte_fecha
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="return confirm('¿Borrar reporte');" href="@Url.Action("DeleteConfirmed","Reporte", new { id = reporte.Reporte_id})" title="eliminar reporte">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </div>
+                                                    
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <a href="@Url.Action("Create","Reporte", new { id = item.Alumno_id})" class="btn btn-info">Agregar reporte</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>

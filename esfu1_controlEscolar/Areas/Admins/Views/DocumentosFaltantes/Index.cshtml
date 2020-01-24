@@ -1,0 +1,68 @@
+﻿@model IEnumerable<esfu1_controlEscolar.Areas.Admins.Models.Alumno>
+
+@{
+    ViewBag.Title = "Indice - Alumno";
+    
+}
+
+<table class="table table-bordered table-striped table-responsive" style="background-color:white;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoPaterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoMaterno)
+            </th>
+            <th>
+                Documentos faltantes reporte
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var doc in item.DocumentosFaltantes)
+                        {
+                            <li>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-info" href="@Url.Action("Edit","DocumentosFaltantes", new { id = doc.DocumentosFaltantes_id})" title="editar reporte">
+                                        editar reporte de @doc.DocumentosFaltantes_fecha
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="return confirm('¿Borrar registro');" href="@Url.Action("DeleteConfirmed","DocumentosFaltantes", new { id = doc.DocumentosFaltantes_id})" title="eliminar reporte de documentos">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </div>
+
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <a href="@Url.Action("Create","DocumentosFaltantes", new { id = item.Alumno_id})" class="btn btn-info">Agregar reporte de documentos</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>

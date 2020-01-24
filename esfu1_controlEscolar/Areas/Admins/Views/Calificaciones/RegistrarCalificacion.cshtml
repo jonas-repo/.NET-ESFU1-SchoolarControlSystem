@@ -1,0 +1,198 @@
+﻿@model esfu1_controlEscolar.Areas.Admins.Models.GrupoCalificar
+@{
+    ViewBag.Title = "Registrar Calificacion";
+    ICollection<esfu1_controlEscolar.Areas.Admins.Models.AlumnosCalificados> alumnosCalificados = ViewBag.alumnosCalificados;
+    ICollection<esfu1_controlEscolar.Areas.Admins.Models.AlumnosCalificados> alumnosNoCalificados = ViewBag.alumnosNoCalificados;
+
+
+    int count = 0;
+    int count2 = 0;
+}
+
+
+<div class="container-fluid" style="background-color:white; font-size:medium;">
+    <br />
+    @if (ViewBag.vacio != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.vacio
+        </div>
+        <br />
+        <br />
+        <a href="@Url.Action("Index","Calificaciones")" class="btn btn-primary btn-lg">Regresar</a>
+
+    }
+    else
+    {
+
+        using (Html.BeginForm("RegistrarCalificacion", "Calificaciones", FormMethod.Post))
+        {
+
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+
+                <button id="download" class="btn btn-info btn-lg"> Generar archivo de excel</button>
+            </div>
+
+            <br />
+            <br />
+            <input type="hidden" value="@ViewBag.CicloGrupo.Grupo" name="grupo.Grupo" />
+            <input type="hidden" value="@ViewBag.CicloGrupo.CicloEscolar" name="grupo.CicloEscolar" />
+            <input type="hidden" value="@ViewBag.CicloGrupo.Materia" name="grupo.Materia" />
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Calificaciones de la materia: @ViewBag.materia - Grupo: @ViewBag.CicloGrupo.Grupo - Ciclo escolar: @ViewBag.CicloGrupo.CicloEscolar</div>
+                <div class="panel-body">
+                    <table class="table table-hover table-bordered" id="tabla_alumnos">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Nombre de alumno
+                                </th>
+                                <th>
+                                    Primer Bimestre
+                                </th>
+                                <th>
+                                    Segundo Bimestre
+                                </th>
+                                <th>
+                                    Tercer Bimestre
+                                </th>
+                                <th>
+                                    Cuarto Bimestre
+                                </th>
+                                <th>
+                                    Quinto Bimestre
+                                </th>
+                                <th>
+                                    Totales
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (alumnosCalificados != null)
+                            {
+                                foreach (var alumno in alumnosCalificados)
+                                {
+                                    <tr>
+                                        <td>
+                                            @alumno.Alumno.Nombre @alumno.Alumno.ApellidoPaterno @alumno.Alumno.ApellidoMaterno
+                                            <input type="hidden" value="@alumno.Alumno.Alumno_id" name="calificacionesEditar[@count].Alumno.Alumno_id" />
+                                            <input type="hidden" value="@ViewBag.materia" name="calificacionesEditar[@count].Materia" />
+                                            <input type="hidden" value="@alumno.Alumno.Nombre @alumno.Alumno.ApellidoPaterno @alumno.Alumno.ApellidoMaterno" name="calificacionesEditar[@count].Nombre" />
+                                            <input type="hidden" name="calificacionesEditar[@count].Calificacion_id" value="@alumno.Calificacion.Calificacion_id" />
+                                        </td>
+                                        <td>
+
+                                            <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificacionesEditar[@count].PrimerBimestre" value="@alumno.Calificacion.PrimerBimestre" />
+                                            <label hidden>Calificacion: @alumno.Calificacion.PrimerBimestre</label>
+                                            <br />
+                                            <input type="number" class="form-control" placeholder="Faltas" name="calificacionesEditar[@count].FaltasPrimerBimestre" value="@alumno.Calificacion.FaltasPrimerBimestre" />
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificacionesEditar[@count].SegundoBimestre" value="@alumno.Calificacion.SegundoBimestre" />
+                                            <label hidden>Calificacion: @alumno.Calificacion.SegundoBimestre</label>
+                                            <br />
+                                            <input type="number" class="form-control" placeholder="Faltas" name="calificacionesEditar[@count].FaltasSegundoBimestre" value="@alumno.Calificacion.FaltasSegundoBimestre" />
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificacionesEditar[@count].TercerBimestre" value="@alumno.Calificacion.TercerBimestre" />
+                                            <label hidden>Calificacion: @alumno.Calificacion.TercerBimestre</label>
+                                            <br />
+                                            <input type="number" class="form-control" placeholder="Faltas" name="calificacionesEditar[@count].FaltasTercerBimestre" value="@alumno.Calificacion.FaltasTercerBimestre" />
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificacionesEditar[@count].CuartoBimestre" value="@alumno.Calificacion.CuartoBimestre" />
+                                            <label hidden>Calificacion: @alumno.Calificacion.CuartoBimestre</label>
+                                            <br />
+                                            <input type="number" class="form-control" placeholder="Faltas" name="calificacionesEditar[@count].FaltasCuartoBimestre" value="@alumno.Calificacion.FaltasCuartoBimestre" />
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificacionesEditar[@count].QuintoBimestre" value="@alumno.Calificacion.QuintoBimestre" />
+                                            <label hidden>Calificacion: @alumno.Calificacion.QuintoBimestre</label>
+                                            <br />
+                                            <input type="number" class="form-control" placeholder="Faltas" name="calificacionesEditar[@count].FaltasQuintoBimestre" value="@alumno.Calificacion.FaltasQuintoBimestre" />
+                                        </td>
+                                        <td>
+                                            @if (alumno.Calificacion.TotalCalificacion != null && alumno.Calificacion.TotalFaltas != null)
+                                            {
+                                                <label>
+                                                    Promedio: @alumno.Calificacion.TotalCalificacion.Value.ToString("0.00")
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    Faltas: @alumno.Calificacion.TotalFaltas
+                                                </label>
+                                            }
+                                        </td>
+                                    </tr>
+                                    count++;
+                                }
+                            }
+
+                            @foreach (var alumno in alumnosNoCalificados)
+                            {
+                                <tr>
+                                    <td>
+                                        @alumno.Alumno.Nombre @alumno.Alumno.ApellidoPaterno @alumno.Alumno.ApellidoMaterno
+                                        <input type="hidden" value="@alumno.Alumno.Alumno_id" name="calificaciones[@count2].Alumno.Alumno_id" />
+                                        <input type="hidden" value="@ViewBag.materia" name="calificaciones[@count2].Materia" />
+                                        <input type="hidden" value="@alumno.Alumno.Nombre @alumno.Alumno.ApellidoPaterno @alumno.Alumno.ApellidoMaterno" name="calificaciones[@count2].Nombre" />
+                                    </td>
+                                    <td>
+                                        <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificaciones[@count2].PrimerBimestre" />
+
+                                        <br />
+                                        <input type="number" class="form-control" placeholder="Faltas" name="calificaciones[@count2].FaltasPrimerBimestre" />
+                                    </td>
+                                    <td>
+                                        <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificaciones[@count2].SegundoBimestre" />
+
+                                        <br />
+                                        <input type="number" class="form-control" placeholder="Faltas" name="calificaciones[@count2].FaltasSegundoBimestre" />
+                                    </td>
+                                    <td>
+                                        <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificaciones[@count2].TercerBimestre" />
+
+                                        <br />
+                                        <input type="number" class="form-control" placeholder="Faltas" name="calificaciones[@count2].FaltasTercerBimestre" />
+                                    </td>
+                                    <td>
+                                        <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificaciones[@count2].CuartoBimestre" />
+
+                                        <br />
+                                        <input type="number" class="form-control" placeholder="Faltas" name="calificaciones[@count2].FaltasCuartoBimestre" />
+                                    </td>
+                                    <td>
+                                        <input type="number" step="0.1" class="form-control" placeholder="Calificacion" name="calificaciones[@count2].QuintoBimestre" />
+
+                                        <br />
+                                        <input type="number" class="form-control" placeholder="Faltas" name="calificaciones[@count2].FaltasQuintoBimestre" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                count2++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        }
+
+        @section Scripts{
+            <script src="~/Areas/assets/plugins/tableToExcel/table2csv.js"></script>
+            <script>
+                    jQuery('#download').on('click', function () {
+                        jQuery('.table').table2csv({
+                         file_name: '@(ViewBag.materia)_@(ViewBag.CicloGrupo.Grupo)_@(ViewBag.CicloGrupo.CicloEscolar).csv',
+                         header_body_space: 0
+                        });
+                     });
+            </script>
+
+        }
+
+    }
+</div>

@@ -1,0 +1,34 @@
+﻿@model esfu1_controlEscolar.Areas.Admins.Models.Reporte
+
+@{
+    ViewBag.Title = "Editar reporte";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Reporte</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Descripcion</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="reporte.Reporte_descripcion" required style="height:250px;">
+                    @Model.Reporte_descripcion
+                </textarea>
+            @Html.ValidationMessageFor(model => model.Reporte_descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <input type="hidden" value="@DateTime.Now" name="reporte.Reporte_fecha" />
+    <input type="hidden" value="@Model.Alumno.Alumno_id" name="reporte.Alumno.Alumno_id" />
+    <input type="hidden" value="@Model.Reporte_id" name="reporte.Reporte_id" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            <a class="btn btn-default" href="@Url.Action("Index","Reporte")">Cancelar</a>
+        </div>
+    </div>
+</div>
+}

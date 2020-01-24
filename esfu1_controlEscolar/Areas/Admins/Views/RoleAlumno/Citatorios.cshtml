@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Citatorios";
+    ICollection<esfu1_controlEscolar.Areas.Admins.Models.Citatorio> citatorios = ViewBag.Citatorios;
+}
+
+
+@if (citatorios.Count() == 0)
+{
+    <div>
+        <img src="~/Areas/assets/img/icon.jpg" />
+    </div>
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel-group col-md-6">
+            @foreach (var citatorio in citatorios)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Aviso de citatorio</div>
+                    <div class="panel-body">
+                        @citatorio.Citatorio_descripcion
+
+                    </div>
+                    <div class="panel-footer">Fecha: @citatorio.Citatorio_fecha.ToShortDateString()</div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model esfu1_controlEscolar.Areas.Admins.Models.Extraordinarios
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "Extraordinarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    if (ViewBag.NoEsImagen != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.NoEsImagen
+        </div>
+    }
+    <div class="form-horizontal">
+        <h4>Registrar Extraordinario</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" >Imagen</label>
+            <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                <div class="col-md-55">
+                    <div class="thumbnail">
+                        <div class="image view view-first">
+                            <img style="height: 50%; width:50%; display: block;" src="~/img/extraordinarios/fa-image.png" alt="imagen" id="image_upload_preview" />
+                        </div>
+                        <div class="caption">
+                            <input id="InputFile" type="file" class="form-control" name="img" required />
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Extraordinario_img, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <input type="hidden" value="@DateTime.Now" name="Extraordinario_fecha" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Registrar" class="btn btn-primary" />
+                <a class="btn btn-default" href="@Url.Action("Index","Extraordinarios")">Cancelar</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    jQuery('#image_upload_preview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        jQuery("#InputFile").change(function () {
+            readURL(this);
+        });
+
+    </script>
+}

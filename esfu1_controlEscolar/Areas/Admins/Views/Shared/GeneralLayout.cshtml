@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title - Admin ESFU 1 </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Bootstrap 3.3.7 -->
+    <link href="~/Areas/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link href="~/Areas/assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Ionicons -->
+    <link href="~/Areas/assets/bower_components/Ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/Areas/assets/dist/css/AdminLTE.css" rel="stylesheet" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="~/Areas/assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link href="~/Areas/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+
+    <link href="~/assets/dataTable/DataTables/datatables.min.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/minilogo.ico">
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+
+    @Html.Partial("navbar_admin")
+    @Html.Partial("sidebar")
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                @RenderBody()
+            </section>
+        </div>
+
+
+    </div>
+    <footer class="main-footer">
+        @Html.Partial("footer_admin")
+    </footer>
+
+    <div class="control-sidebar-bg"></div>
+
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="~/Areas/assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Areas/assets/bower_components/jquery-ui/jquery-ui.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>$.widget.bridge('uibutton', $.ui.button);</script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Areas/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="~/Areas/assets/bower_components/raphael/raphael.min.js"></script>
+    @*<script src="~/Areas/assets/js/morris.min.js"></script>*@
+    <!-- Sparkline -->
+    <script src="~/Areas/assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <!-- jQuery Knob Chart -->
+    <script src="~/Areas/assets/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="~/Areas/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+
+    <script src="~/Areas/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+
+    <script src="~/Areas/assets/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Areas/assets/dist/js/adminlte.min.js"></script>
+
+    <script src="~/assets/dataTable/DataTables/datatables.js"></script>
+    <script src="~/assets/dataTable/dataTable.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

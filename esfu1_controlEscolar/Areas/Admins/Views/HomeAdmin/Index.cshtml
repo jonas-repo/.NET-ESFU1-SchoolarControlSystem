@@ -1,0 +1,39 @@
+﻿@{
+      ViewBag.Title = "Inicio";
+      ICollection<esfu1_controlEscolar.Areas.Admins.Models.Avisos> avisos = ViewBag.avisos;
+}
+
+@if(avisos.Count() == 0)
+{
+    <div>
+        <img src="~/Areas/assets/img/icon.jpg" />
+    </div>
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel-group col-md-6">
+            @foreach (var aviso in avisos)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Nuevo Aviso</div>
+                    <div class="panel-body">
+                        @aviso.Aviso_descripcion
+                        <br />
+                        <hr />
+                        @if (aviso.Aviso_img != null)
+                        {
+                            <a href="@aviso.Aviso_img" target="_blank">
+                                <img src="@aviso.Aviso_img" class="img-thumbnail" style="height:250px;" />
+                            </a>
+                        }
+
+                    </div>
+                    <div class="panel-footer">Fecha: @aviso.Aviso_fecha.ToShortDateString()</div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

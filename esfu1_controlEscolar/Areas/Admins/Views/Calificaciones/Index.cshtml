@@ -1,0 +1,168 @@
+﻿@model esfu1_controlEscolar.Areas.Admins.Models.GrupoCalificar
+@{
+    ViewBag.Title = "Materias";
+
+    string[] materias1 = {
+"Español I",
+"Ingles I",
+"Matemáticas I",
+"Ciencias I (Biología)",
+"Tecnología I",
+"Geografía de México y el Mundo I",
+"Asignatura Estatal",
+"Educación Fisica I",
+"Historia I",
+"Formación Cívica Ética I",
+"Artes I",
+"Tutoria I"
+};
+
+    string[] materias2 = {
+"Español II",
+"Ingles II",
+"Matemáticas II",
+"Ciencias II (Física)",
+"Tecnología II",
+"Geografía de México y el Mundo II",
+"Asignatura Estatal II",
+"Educación Fisica II",
+"Historia II",
+"Formación Cívica Ética II",
+"Artes II",
+"Tutoria II"
+};
+
+    string[] materias3 = {
+"Español III",
+"Ingles III",
+"Matemáticas III",
+"Ciencias III (Química)",
+"Tecnología III",
+"Geografía de México y el Mundo III",
+"Asignatura Estatal III",
+"Educación Fisica III",
+"Historia III",
+"Formación Cívica Ética III",
+"Artes III",
+"Tutoria III"
+};
+
+
+
+}
+
+
+
+
+
+
+<hr />
+
+
+@using (Html.BeginForm("RegistrarCalificacion", "Calificaciones", FormMethod.Get))
+{
+
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </div>
+    }
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5">
+                <select class="form-control" name="grupo.Grupo" style="font-size:medium;" required>
+                    <option selected disabled> Grupo</option>
+                    <option value="A"> A </option>
+                    <option value="B"> B </option>
+                    <option value="C"> C </option>
+                    <option value="D"> D </option>
+                    <option value="E"> E </option>
+                    <option value="F"> F </option>
+                    <option value="G"> G </option>
+                    <option value="H"> H </option>
+                    <option value="I"> I </option>
+                    <option value="J"> J </option>
+                    <option value="K"> K </option>
+                    <option value="L"> L </option>
+                </select>
+            </div>
+
+
+            <div class="col-md-5">
+                <select class="form-control" name="grupo.CicloEscolar" style="font-size:medium;" required>
+                    <option selected disabled> Ciclo escolar</option>
+                    <option value="@(DateTime.Now.Year - 1) - @DateTime.Now.Year"> @(DateTime.Now.Year - 1) - @DateTime.Now.Year</option>
+                    @for (int i = 1; i < 4; i++)
+                    {
+                        <option value="@(DateTime.Now.Year  + i - 1) - @DateTime.Now.Year"> @(DateTime.Now.Year + i - 1) - @(DateTime.Now.Year + i) </option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <br>
+                <button class="btn btn-lg btn-default" style="background-color:white;">PRIMERO</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var materia in materias1)
+            {
+                <div class="col-sm-5">
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-block btn-primary active" name="grupo.Materia" value="1,@materia">@materia</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <br>
+                <button class="btn btn-lg btn-default" style="background-color:white;">Segundo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var materia in materias2)
+            {
+                <div class="col-sm-5">
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-block btn-primary active" name="grupo.Materia" value="2,@materia">@materia</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <br>
+                <button class="btn btn-lg btn-default" style="background-color:white;">Tercero</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var materia in materias3)
+            {
+                <div class="col-sm-5">
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-block btn-primary active" name="grupo.Materia" value="3,@materia">@materia</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<!--INICIAN BOTONES-->
+
+<br>

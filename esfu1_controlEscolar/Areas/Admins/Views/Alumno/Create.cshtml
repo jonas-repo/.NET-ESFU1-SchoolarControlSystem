@@ -1,0 +1,198 @@
+﻿@model esfu1_controlEscolar.Areas.Admins.Models.Alumno
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+
+
+
+@using (Html.BeginForm("Create", "Alumno", FormMethod.Post))
+{
+
+    if(Model != null)
+    {
+        <input type="hidden" value="@Model.Alumno_id" name="idAlumno" />
+    }
+    
+
+    <div class="form-horizontal"><h4>Registrar Alumno</h4>@if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Success
+            </div>
+        }
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Nombre" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApellidoPaterno, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Apellido Paterno" } })
+                @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApellidoMaterno, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Apellido Materno" } })
+                @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+
+                @if (ViewBag.Editar != null)
+                {
+                   
+                    <select class="form-control" name="CicloEscolar">
+                        <option disabled> Ciclo escolar</option>
+                        @for (int i = 0; i < 3; i++)
+                        {
+                            string date = (DateTime.Now.Year + i - 1) + " - " + (DateTime.Now.Year + i);
+                            if (date.Equals(Model.CicloEscolar))
+                            {
+                                <option value="@(DateTime.Now.Year  + i - 1) - @DateTime.Now.Year" selected> @(DateTime.Now.Year + i - 1) - @(DateTime.Now.Year + i) </option>
+                            }
+                            else
+                            {
+                                <option value="@(DateTime.Now.Year  + i - 1) - @DateTime.Now.Year"> @(DateTime.Now.Year + i - 1) - @(DateTime.Now.Year + i) </option>
+                            }
+
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select class="form-control" name="CicloEscolar">
+                        <option selected disabled> Ciclo escolar</option>
+                        <option value="@(DateTime.Now.Year - 1) - @DateTime.Now.Year"> @(DateTime.Now.Year - 1) - @DateTime.Now.Year</option>
+                        @for (int i = 1; i < 4; i++)
+                        {
+                            <option value="@(DateTime.Now.Year  + i - 1) - @DateTime.Now.Year"> @(DateTime.Now.Year + i - 1) - @(DateTime.Now.Year + i) </option>
+                        }
+                    </select>
+                }
+
+                @Html.ValidationMessageFor(model => model.CicloEscolar, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @if (ViewBag.Editar != null)
+                {
+                <select class="form-control" name="Grado">
+                    <option disabled> Grado</option>
+                    @for (int i = 1; i < 4; i++)
+                    {
+                        if (Model.Grado.Equals(i.ToString()))
+                        {
+                            <option value="@i" selected> @i°</option>
+                        }
+                        else
+                        {
+                            <option value="@i"> @i°</option>
+                        }
+
+                    }
+                </select>
+                }
+                else
+                {
+                    <select class="form-control" name="Grado">
+                        <option selected disabled> Grado</option>
+                        <option value="1"> 1°</option>
+                        <option value="2"> 2°</option>
+                        <option value="3"> 3°</option>
+                    </select>
+                }
+
+                @Html.ValidationMessageFor(model => model.Grado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @if (ViewBag.Editar != null)
+                {
+                    string[] grupos = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L" };
+
+                <select class="form-control" name="Grupo">
+                    <option disabled> Grupo</option>
+
+                    @foreach (var grupo in grupos)
+                    {
+                        if (grupo.Equals(Model.Grupo))
+                        {
+                            <option value="@grupo" selected> @grupo </option>
+                        }
+                        else
+                        {
+                            <option value="@grupo"> @grupo </option>
+                        }
+
+                    }
+                </select>
+                }
+                else
+                {
+                    <select class="form-control" name="Grupo">
+                        <option selected disabled> Grupo</option>
+                        <option value="A"> A </option>
+                        <option value="B"> B </option>
+                        <option value="C"> C </option>
+                        <option value="D"> D </option>
+                        <option value="E"> E </option>
+                        <option value="F"> F </option>
+                        <option value="G"> G </option>
+                        <option value="H"> H </option>
+                        <option value="I"> I </option>
+                        <option value="J"> J </option>
+                        <option value="K"> K </option>
+                        <option value="L"> L </option>
+                    </select>
+                }
+
+                @Html.ValidationMessageFor(model => model.Grupo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Curp, new { htmlAttributes = new { @class = "form-control", @Placeholder = "CURP" } })
+                @Html.ValidationMessageFor(model => model.Curp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+<br />
+<div>
+    @{Html.RenderAction("Index", "Alumno");}
+</div>
+
+

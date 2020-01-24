@@ -1,0 +1,33 @@
+﻿@model esfu1_controlEscolar.Areas.Admins.Models.DocumentosFaltantes
+@{
+    ViewBag.Title = "Crear reporte documentos";
+    esfu1_controlEscolar.Areas.Admins.Models.Alumno alumno = ViewBag.alumno;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Documentos faltantes</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Descripcion</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="documentosFaltantes.DocumentosFaltantes_descripcion" required="" style="height:250px;">
+
+                </textarea>
+                @Html.ValidationMessageFor(model => model.DocumentosFaltantes_descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <input type="hidden" value="@DateTime.Now" name="documentosFaltantes.DocumentosFaltantes_fecha" />
+        <input type="hidden" value="@alumno.Alumno_id" name="documentosFaltantes.Alumno.Alumno_id" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Registrar" class="btn btn-primary" />
+                <a class="btn btn-default" href="@Url.Action("Index","DocumentosFaltantes")">Cancelar</a>
+            </div>
+        </div>
+    </div>
+}

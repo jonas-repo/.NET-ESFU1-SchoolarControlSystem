@@ -1,0 +1,43 @@
+﻿@model IEnumerable<esfu1_controlEscolar.Areas.Admins.Models.Extraordinarios>
+
+@{
+    ViewBag.Title = "Indice extraordinarios";
+}
+
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create","Extraordinarios")">Subir Extraordinario</a>
+</p>
+<table class="table table-bordered table-hover table-striped" style="background-color:white;">
+    <thead>
+        <tr>
+            <th>
+                Extraordinario Imagen
+            </th>
+            <th>
+               Extraordinario Fecha
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.Extraordinario_img)" style="height:150px;"/>                  
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extraordinario_fecha)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","Extraordinarios", new { id = item.Extraordinario_id})" class="btn btn-info">Editar</a>
+                    <a onclick="return confirm('¿Borrar registro?');" href="@Url.Action("DeleteConfirmed","Extraordinarios", new { id = item.Extraordinario_id})" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>

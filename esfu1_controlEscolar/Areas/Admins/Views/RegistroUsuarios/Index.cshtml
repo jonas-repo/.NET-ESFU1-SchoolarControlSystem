@@ -1,0 +1,34 @@
+﻿@model ICollection<esfu1_controlEscolar.Areas.Admins.Models.AdminUsers>
+
+<table class="table table-hover table-striped table-bordered" style="background-color:white;">
+    <thead>
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                Rol
+            </th>
+            <th>
+                Opciones
+            </th>
+        </tr>               
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+        <tr>
+            <td>
+                @user.Email
+            </td>
+            <td>
+                @user.Role
+            </td>
+            <td>
+                <a onclick="return confirm('¿Borrar este usuario?');" href="@Url.Action("DeleteUser","RegistroUsuarios", new { id = user.UserId})" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>

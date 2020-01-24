@@ -1,0 +1,36 @@
+﻿@{
+
+    ViewBag.Title = "Extraordinarios";
+    ICollection<esfu1_controlEscolar.Areas.Admins.Models.Extraordinarios> extras = ViewBag.extras;
+}
+
+
+@if (extras.Count() == 0)
+{
+    <div>
+        <img src="~/Areas/assets/img/icon.jpg" />
+    </div>
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel-group col-md-6">
+            @foreach (var extra in extras)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Extraordinarios</div>
+                    <div class="panel-body">
+                        <a href="@extra.Extraordinario_img" target="_blank">
+                            <img src="@extra.Extraordinario_img" class="img-thumbnail" style="height:250px;" />
+                        </a>
+
+                    </div>
+                    <div class="panel-footer">Fecha: @extra.Extraordinario_fecha.ToShortDateString()</div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+

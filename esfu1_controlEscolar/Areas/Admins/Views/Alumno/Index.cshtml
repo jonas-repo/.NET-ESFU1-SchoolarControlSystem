@@ -1,0 +1,62 @@
+﻿@model IEnumerable<esfu1_controlEscolar.Areas.Admins.Models.Alumno>
+
+
+<table class="table table-hover table-striped table-bordered" style="background-color:white;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CicloEscolar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grupo)
+            </th>
+            <th>
+                Usuario
+            </th>
+            <th>
+                Contraseña
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre) @Html.DisplayFor(modelItem => item.ApellidoPaterno)  @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CicloEscolar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grupo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    <a href="@Url.Action("Create","Alumno", new { id_editar = item.Alumno_id})" class="btn btn-info">Editar</a>
+                    <a onclick="return confirm('¿Borrar al alumno?');" href="@Url.Action("DeleteConfirmed","Alumno", new { id = item.Alumno_id})" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+
+  
+
+</table>

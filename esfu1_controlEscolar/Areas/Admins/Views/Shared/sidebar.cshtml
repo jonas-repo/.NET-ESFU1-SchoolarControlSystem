@@ -1,0 +1,112 @@
+﻿<!-- Left side column. contains the logo and sidebar -->
+@using Microsoft.AspNet.Identity
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="~/Areas/assets/img/icon.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>CONTROL ESCOLAR</p>
+            </div>
+        </div>
+        <!-- MENU OPCIONES -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">OPCIONES</li>
+            @if (User.IsInRole("Alumno"))
+            {
+                <li class="treeview">
+                    <a href="#">
+                        <!-- MENU USUARIOS -->
+                        <i class="fa fa-book"></i> <span>Mi información</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("Index","HomeAdmin")"><i class="fa fa-home"></i>Inicio</a></li>
+                        <li><a href="@Url.Action("Calificaciones","RoleAlumno")"><i class="fa fa-check"></i>Calificaciones</a></li>
+                        <li><a href="@Url.Action("Extraordinarios","RoleAlumno")"><i class="fa fa-file"></i>Examenes extraordinarios</a></li>
+                        <li><a href="@Url.Action("Correo","RoleAlumno")"><i class="fa fa-user"></i>Mi correo electrónico</a></li>
+                        <li><a href="@Url.Action("Reportes","RoleAlumno")"><i class="fa fa-circle-o"></i>Reportes</a></li>
+                        <li><a href="@Url.Action("Citatorios","RoleAlumno")"><i class="fa fa-circle-o"></i>Citatorios</a></li>
+                        <li><a href="@Url.Action("DocumentosFaltantes","RoleAlumno")"><i class="fa fa-circle-o"></i>Documentos Faltantes</a></li>
+                    </ul>
+                </li>              
+            }
+            @if (!User.IsInRole("Alumno"))
+            {
+                <li class="treeview">
+                    <a href="#">
+                        <!-- MENU USUARIOS -->
+                        <i class="fa fa-book"></i> <span>Gestión institucional</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("Index","HomeAdmin")"><i class="fa fa-home"></i>Inicio</a></li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Create","Alumno")"><i class="fa fa-user-plus"></i>Registrar alumnos</a></li>
+                            <li><a href="@Url.Action("Register","RegistroUsuarios")"><i class="fa fa-users"></i>Registrar otros usuarios</a></li>
+                        }
+                    </ul>
+                </li>
+
+                if (User.IsInRole("Admin"))
+                {
+                    <!-- MENU gestion ciclo -->
+                    <li class=" treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Gestion de ciclo</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Index","Calificaciones")"><i class="fa fa-check"></i>Registro de calificaciones</a></li>
+                            <li><a href="@Url.Action("Index","Extraordinarios")"><i class="fa fa-file"></i>Examenes extraordinarios</a></li>
+                        </ul>
+                    </li>
+                }
+
+                <!-- MENU INFORMES -->
+                <li class=" treeview">
+                    <a href="#">
+                        <i class="fa fa-clipboard"></i> <span>Informes</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @if (User.IsInRole("Prefecto"))
+                        {
+                            <li><a href="@Url.Action("Index","Reporte")"><i class="fa fa-circle-o"></i>Reportes</a></li>
+                        }
+                        @if (User.IsInRole("TrabajoSocial"))
+                        {
+                            <li><a href="@Url.Action("Index","Citatorio")"><i class="fa fa-circle-o"></i>Citatorios</a></li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index","Reporte")"><i class="fa fa-circle-o"></i>Reportes</a></li>
+                            <li><a href="@Url.Action("Index","Citatorio")"><i class="fa fa-circle-o"></i>Citatorios</a></li>
+                            <li><a href="@Url.Action("Index","Avisos")"><i class="fa fa-circle-o"></i>Avisos</a></li>
+                            <li><a href="@Url.Action("Index","DocumentosFaltantes")"><i class="fa fa-circle-o"></i>Faltantes de documentación</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+            <li>
+                <a href="/Account/LogOff/">
+                    <i class="fa fa-times"></i> <span>Cerrar Sesión</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+</aside>
+
